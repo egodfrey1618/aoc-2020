@@ -26,6 +26,9 @@ def parse_rule(s):
     return Rule(rule_id=rule_id, tokens=tokens)
 
 def rules_match(s, rules, rule_id):
+    """
+    Basically the CYK algorithm for context-free grammars.
+    """
     # Tries to identify, given a set of rules and a rule_id, whether that matches a string.
     cache = {}
     rules_by_id = {rule.rule_id: rule for rule in rules}
@@ -61,8 +64,10 @@ def rules_match(s, rules, rule_id):
             else:
                 # The multiple token case. To simplify things - as it's what AoC has - let's assert these are all ints.
                 # I'll also assert the length is 2 or 3, for simplicity.
-                assert all(type(t) == int for t in tokens)
-                assert len(tokens) in [2, 3]
+                #
+                # Edit: I realise afterwards I could have simplified this by turning the "3 token rules" into "2 token rules"
+                # by adding more rules.
+                assert all(type(t) == int for t in tokens) assert len(tokens) in [2, 3]
                 if len(tokens) == 2:
                     for i_ in range(i, j):
                         if inner(i, i_, tokens[0]) and inner(i_, j, tokens[1]):
