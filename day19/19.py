@@ -67,7 +67,8 @@ def rules_match(s, rules, rule_id):
                 #
                 # Edit: I realise afterwards I could have simplified this by turning the "3 token rules" into "2 token rules"
                 # by adding more rules.
-                assert all(type(t) == int for t in tokens) assert len(tokens) in [2, 3]
+                assert all(type(t) == int for t in tokens) 
+                assert len(tokens) in [2, 3]
                 if len(tokens) == 2:
                     for i_ in range(i, j):
                         if inner(i, i_, tokens[0]) and inner(i_, j, tokens[1]):
